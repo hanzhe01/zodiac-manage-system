@@ -1,0 +1,17 @@
+package com.youlintech.zodiac.web;
+
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
+
+@EnableScheduling
+@SpringBootApplication
+@MapperScan("com.youlintech.zodiac.*.mapper")
+public class ZodiacWebApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ZodiacWebApplication.class, args);
+    }
+
+}

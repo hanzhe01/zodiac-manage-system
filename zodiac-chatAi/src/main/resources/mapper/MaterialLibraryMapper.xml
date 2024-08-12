@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youlintech.zodiac.chatai.mapper.MaterialLibraryMapper">
+
+    <resultMap id="BaseResultMap" type="com.youlintech.zodiac.chatai.domain.MaterialLibrary">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="constellationId" column="constellation_id" jdbcType="BIGINT"/>
+            <result property="horoscopeFortune" column="horoscope_fortune" jdbcType="VARCHAR"/>
+            <result property="horoscopeFortuneStar" column="horoscope_fortune_star" jdbcType="DECIMAL"/>
+            <result property="luckyColor" column="lucky_color" jdbcType="VARCHAR"/>
+            <result property="luckyNumbers" column="lucky_numbers" jdbcType="BIGINT"/>
+            <result property="luckyTime" column="lucky_time" jdbcType="VARCHAR"/>
+            <result property="luckyItems" column="lucky_items" jdbcType="VARCHAR"/>
+            <result property="purchaseLink" column="purchase_link" jdbcType="VARCHAR"/>
+            <result property="firstTitleName" column="first_title_name" jdbcType="VARCHAR"/>
+            <result property="firstTitleContent" column="first_title_content" jdbcType="VARCHAR"/>
+            <result property="firstTitleStar" column="first_title_star" jdbcType="DECIMAL"/>
+            <result property="secondTitleName" column="second_title_name" jdbcType="VARCHAR"/>
+            <result property="secondTitleContent" column="second_title_content" jdbcType="VARCHAR"/>
+            <result property="secondTitleStar" column="second_title_star" jdbcType="DECIMAL"/>
+            <result property="thirdTitleName" column="third_title_name" jdbcType="VARCHAR"/>
+            <result property="thirdTitleContent" column="third_title_content" jdbcType="VARCHAR"/>
+            <result property="thirdTitleStar" column="third_title_star" jdbcType="DECIMAL"/>
+            <result property="isWeekFortune" column="is_week_fortune" jdbcType="BIGINT"/>
+            <result property="generationDate" column="generation_date" jdbcType="TIMESTAMP"/>
+            <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,constellation_id,horoscope_fortune,
+        horoscope_fortune_star,lucky_color,lucky_numbers,
+        lucky_time,lucky_items,purchase_link,
+        first_title_name,first_title_content,first_title_star,
+        second_title_name,second_title_content,second_title_star,
+        third_title_name,third_title_content,third_title_star,
+        is_week_fortune,generation_date,create_by,
+        create_time,update_by,update_time,
+        remark
+    </sql>
+</mapper>

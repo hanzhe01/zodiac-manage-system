@@ -1,0 +1,8 @@
+spring:
+  profiles:
+#    active: prod
+    active: test
+management:
+  metrics:
+    export:
+      enabled: true

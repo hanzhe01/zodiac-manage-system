@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youlintech.zodiac.web.mapper.PetMapper">
+
+    <resultMap id="BaseResultMap" type="com.youlintech.zodiac.web.domain.Pet">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="petId" column="pet_id" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,pet_id
+    </sql>
+</mapper>

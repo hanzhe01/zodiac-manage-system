@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youlintech.zodiac.fortune.mapper.ConstellationPairingMapper">
+
+    <resultMap type="ConstellationPairing" id="ConstellationPairingResult">
+        <result property="id"    column="id" />
+        <result property="bePairedId"    column="be_paired_id" />
+        <result property="pairingId"    column="pairing_id" />
+        <result property="starLevel"    column="star_level" />
+        <result property="suggestion"    column="suggestion" />
+        <result property="dateUpdated"    column="date_updated" />
+    </resultMap>
+
+</mapper>

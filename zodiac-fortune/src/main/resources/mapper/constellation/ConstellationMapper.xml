@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youlintech.zodiac.fortune.mapper.ConstellationMapper">
+
+    <resultMap type="Constellation" id="ConstellationResult">
+        <result property="id"    column="id" />
+        <result property="constellationName"    column="constellation_name" />
+        <result property="birthday"    column="birthday" />
+        <result property="updataDate"    column="updata_date" />
+        <result property="webUrl"    column="web_url" />
+        <result property="meterialLibraryId"    column="meterial_library_id" />
+        <result property="weekMeterialLibraryId"    column="week_meterial_library_id" />
+    </resultMap>
+
+
+</mapper>

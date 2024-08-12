@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youlintech.zodiac.web.mapper.ConstellationMapper">
+
+    <resultMap id="BaseResultMap" type="com.youlintech.zodiac.web.domain.Constellation">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="constellationName" column="constellation_name" jdbcType="VARCHAR"/>
+            <result property="birthday" column="birthday" jdbcType="VARCHAR"/>
+            <result property="updataDate" column="updata_date" jdbcType="DATE"/>
+            <result property="webUrl" column="web_url" jdbcType="VARCHAR"/>
+            <result property="meterialLibraryId" column="meterial_library_id" jdbcType="BIGINT"/>
+            <result property="weekMeterialLibraryId" column="week_meterial_library_id" jdbcType="BIGINT"/>
+            <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="ConstellationDetailResultMap" type="com.youlintech.zodiac.web.model.vo.ConstellationDetailsVO">
+        <result property="id" column="id"/>
+        <result property="constellationName" column="constellation_name"/>
+        <result property="birthday" column="birthday"/>
+        <result property="meterialLibraryId" column="meterial_library_id"/>
+        <result property="horoscopeFortune" column="horoscope_fortune"/>
+        <result property="horoscopeFortuneStar" column="horoscope_fortune_star"/>
+        <result property="luckyColor" column="lucky_color"/>
+        <result property="luckyNumbers" column="lucky_numbers"/>
+        <result property="luckyTime" column="lucky_time"/>
+        <result property="luckyItems" column="lucky_items"/>
+        <result property="purchaseLink" column="purchase_link"/>
+        <result property="firstTitleName" column="first_title_name"/>
+        <result property="firstTitleContent" column="first_title_content"/>
+        <result property="firstTitleStar" column="first_title_star"/>
+        <result property="secondTitleName" column="second_title_name"/>
+        <result property="secondTitleContent" column="second_title_content"/>
+        <result property="secondTitleStar" column="second_title_star"/>
+        <result property="thirdTitleName" column="third_title_name"/>
+        <result property="thirdTitleContent" column="third_title_content"/>
+        <result property="thirdTitleStar" column="third_title_star"/>
+        <result property="pairingId" column="pairing_id"/>
+        <result property="starLevel" column="star_level"/>
+        <result property="suggestion" column="suggestion"/>
+        <result property="pairingConstellationName" column="paired_constellation_name"/>
+        <result property="pairingBirthday" column="paired_birthday"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,constellation_name,birthday,
+        updata_date,web_url,meterial_library_id,
+        week_meterial_library_id,create_by,create_time,
+        update_by,update_time,remark
+    </sql>
+    <select id="getConstellationFortuneDetail" resultMap="ConstellationDetailResultMap">
+        SELECT
+            c.id AS id,
+            c.constellation_name AS constellation_name,
+            c.birthday AS birthday,
+            c.meterial_library_id AS meterial_library_id,
+            m.horoscope_fortune AS horoscope_fortune,
+            m.horoscope_fortune_star AS horoscope_fortune_star,
+            m.lucky_color AS lucky_color,
+            m.lucky_numbers AS lucky_numbers,
+            m.lucky_time AS lucky_time,
+            m.lucky_items AS lucky_items,
+            m.purchase_link AS purchase_link,
+            m.first_title_name AS first_title_name,
+            m.first_title_content AS first_title_content,
+            m.first_title_star AS first_title_star,
+            m.second_title_name AS second_title_name,
+            m.second_title_content AS second_title_content,
+            m.second_title_star AS second_title_star,
+            m.third_title_name AS third_title_name,
+            m.third_title_content AS third_title_content,
+            m.third_title_star AS third_title_star,
+            cp.pairing_id AS pairing_id,
+            cp.star_level AS star_level,
+            cp.suggestion AS suggestion,
+            p.constellation_name AS paired_constellation_name,
+            p.birthday AS paired_birthday
+        FROM
+            tb_constellation c
+                JOIN
+            tb_material_library m ON c.id = m.constellation_id AND c.meterial_library_id = m.id
+                JOIN
+            tb_constellation_pairing cp ON c.id = cp.be_paired_id AND cp.pairing_id = #{pairingId}
+                LEFT JOIN
+            tb_constellation p ON cp.pairing_id = p.id
+        WHERE
+            c.id = #{constellationId};
+    </select>
+
+</mapper>

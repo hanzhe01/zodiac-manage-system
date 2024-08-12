@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youlintech.zodiac.web.mapper.ConstellationPairingMapper">
+
+    <resultMap id="BaseResultMap" type="com.youlintech.zodiac.web.domain.ConstellationPairing">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="bePairedId" column="be_paired_id" jdbcType="BIGINT"/>
+            <result property="pairingId" column="pairing_id" jdbcType="BIGINT"/>
+            <result property="starLevel" column="star_level" jdbcType="DECIMAL"/>
+            <result property="suggestion" column="suggestion" jdbcType="VARCHAR"/>
+            <result property="dateUpdated" column="date_updated" jdbcType="TIMESTAMP"/>
+            <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,be_paired_id,pairing_id,
+        star_level,suggestion,date_updated,
+        create_by,create_time,update_by,
+        update_time,remark
+    </sql>
+</mapper>
