@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.youlintech.zodiac.common.core.domain.AjaxResult;
 import com.youlintech.zodiac.common.core.redis.RedisCache;
+import com.youlintech.zodiac.fortune.constant.RedisConstant;
 import com.youlintech.zodiac.fortune.domain.Constellation;
 import com.youlintech.zodiac.fortune.domain.ConstellationPairing;
 import com.youlintech.zodiac.fortune.domain.MaterialLibrary;
@@ -15,9 +16,13 @@ import com.youlintech.zodiac.fortune.model.vo.MaterialLibraryPreviewVO;
 import com.youlintech.zodiac.fortune.service.IConstellationPairingService;
 import com.youlintech.zodiac.fortune.service.IConstellationService;
 import com.youlintech.zodiac.fortune.service.IMaterialLibraryService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +33,7 @@ import java.util.Map;
  * @date 2024-07-17
  */
 @Service
+@Slf4j
 public class ConstellationServiceImpl extends ServiceImpl<ConstellationMapper, Constellation> implements IConstellationService {
 
     @Autowired
@@ -54,13 +60,24 @@ public class ConstellationServiceImpl extends ServiceImpl<ConstellationMapper, C
          */
         List<Constellation> constellationList = constellationMapper.selectList(buildQueryWrapper(constellation));
         for (Constellation con : constellationList) {
-            String materialIdKey = "constellation:" + con.getId() + ":material_id";
+            String materialIdKey = RedisConstant.getMaterialIdKey(con.getId());
+            String updateTimeStr = redisCache.getCacheObject(RedisConstant.AUTO_MATERIAL_LIBRARY_TIME_KEY);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            Date updateTime = new Date();
+            try {
+                updateTime = sdf.parse(updateTimeStr);
+                log.info("Converted Date:{} ", updateTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             // 获取当前对象的MeterialLibraryId和Redis中对应的值
-            Long currentMeterialLibraryId = con.getMeterialLibraryId();
-            Long redisMeterialLibraryId = redisCache.getCacheObject(materialIdKey);
-            if (currentMeterialLibraryId != null && redisMeterialLibraryId != null
-                    && !currentMeterialLibraryId.equals(redisMeterialLibraryId)) {
-                con.setMeterialLibraryId(redisCache.getCacheObject(materialIdKey));
+            Long currentMaterialLibraryId = con.getMeterialLibraryId();
+            Long redisMaterialLibraryId = redisCache.getCacheObject(materialIdKey);
+            if (currentMaterialLibraryId != null && redisMaterialLibraryId != null
+                    && !currentMaterialLibraryId.equals(redisMaterialLibraryId)) {
+                con.setMeterialLibraryId(redisMaterialLibraryId);
+                materialLibraryService.removeById(currentMaterialLibraryId);
+                con.setUpdateTime(updateTime);
                 this.updateById(con);
             }
         }
@@ -85,6 +102,8 @@ public class ConstellationServiceImpl extends ServiceImpl<ConstellationMapper, C
         if (ajaxResult != null) {
             return ajaxResult;
         }
+        String materialIdKey = RedisConstant.getMaterialIdKey(constellation.getId());
+        redisCache.setCacheObject(materialIdKey, constellation.getMeterialLibraryId());
         if (this.updateById(constellation)) {
             return AjaxResult.success("修改成功", constellation);
         }

@@ -14,6 +14,12 @@ import org.apache.ibatis.annotations.Param;
 */
 @Mapper
 public interface ConstellationMapper extends BaseMapper<Constellation> {
+    /**
+     * 获取星座详情
+     * @param constellationId
+     * @param pairingId
+     * @return
+     */
     public ConstellationDetailsVO getConstellationFortuneDetail(
             @Param("constellationId") Long constellationId,
             @Param("pairingId") Long pairingId);

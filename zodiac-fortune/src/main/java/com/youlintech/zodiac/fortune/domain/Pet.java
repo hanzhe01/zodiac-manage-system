@@ -34,8 +34,12 @@ public class Pet extends BaseEntity
     private Long id;
 
     /** 设备id */
-    @Excel(name = "设备白名单ID")
-    @ApiModelProperty("设备id")
-    private Long petId;
+    @Excel(name = "UUID")
+    @ApiModelProperty("设备UUID")
+    private String petId;
+
+    @Excel(name = "网址+UUID")
+    @ApiModelProperty("网址+UUID")
+    private String urlUuid;
 
 }

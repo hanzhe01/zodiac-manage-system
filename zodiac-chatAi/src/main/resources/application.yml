@@ -1,7 +1,9 @@
 spring:
   profiles:
-#    active: prod
-    active: test
+    active: prod
+#    active: test
+server:
+  port: 8082
 management:
   metrics:
     export:

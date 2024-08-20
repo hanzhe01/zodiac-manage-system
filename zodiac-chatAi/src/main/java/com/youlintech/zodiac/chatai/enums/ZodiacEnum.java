@@ -1,6 +1,24 @@
 package com.youlintech.zodiac.chatai.enums;
 
+/**
+ * @author oyhz
+ */
+
 public enum ZodiacEnum {
+    /**
+     * 1. 白羊座
+     * 2. 金牛座
+     * 3. 双子座
+     * 4. 巨蟹座
+     * 5. 狮子座
+     * 6. 处女座
+     * 7. 天秤座
+     * 8. 天蝎座
+     * 9. 射手座
+     * 10. 摩羯座
+     * 11. 水瓶座
+     * 12. 双鱼座
+     */
     ARIES(1, "Aries"),
     TAURUS(2, "Taurus"),
     GEMINI(3, "Gemini"),

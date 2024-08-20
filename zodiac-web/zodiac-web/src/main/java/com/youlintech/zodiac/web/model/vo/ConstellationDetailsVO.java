@@ -6,6 +6,9 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
+/**
+ * @author oyhz
+ */
 @Data
 @ApiModel(description = "星座运势详情")
 public class ConstellationDetailsVO {

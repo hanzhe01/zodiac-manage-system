@@ -34,7 +34,7 @@ public interface IMaterialLibraryService extends IService<MaterialLibrary> {
 
     /**
      * 获取每个星座的素材列表
-     *
+     * @return 返回map集合
      */
     Map<Long, List<Long>> getMaterialLibraryListByConstellationId();
 

@@ -78,6 +78,7 @@ public class PetServiceImpl extends ServiceImpl<PetMapper, Pet> implements IPetS
     private LambdaQueryWrapper<Pet> buildQueryWrapper(Pet query) {
         Map<String, Object> params = query.getParams();
         LambdaQueryWrapper<Pet> lqw = Wrappers.lambdaQuery();
+        lqw.eq(query.getPetId()!=null, Pet::getPetId, query.getPetId());
         return lqw;
     }
 

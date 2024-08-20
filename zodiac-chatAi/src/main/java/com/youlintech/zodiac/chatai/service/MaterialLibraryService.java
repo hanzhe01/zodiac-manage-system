@@ -1,8 +1,8 @@
 package com.youlintech.zodiac.chatai.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.youlintech.zodiac.chatai.common.entity.ResponseEntity;
 import com.youlintech.zodiac.chatai.domain.MaterialLibrary;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.youlintech.zodiac.chatai.model.MaterialLibraryAiPojo;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +16,12 @@ import java.util.List;
 @Service
 public interface MaterialLibraryService extends IService<MaterialLibrary> {
 
+    /**
+     * 自动生成
+     * @param constellationName
+     * @param number
+     * @param remark
+     * @return
+     */
     ResponseEntity<List<MaterialLibraryAiPojo>> autoAiGeneration(String constellationName, Integer number, String remark);
 }

@@ -38,8 +38,8 @@ public class FortuneController {
     public ResponseEntitys<ConstellationDetailsVO> getConstellationFortuneDetail(
             @ApiParam(value = "星座ID", required = true) @PathVariable("constellationId") Long constellationId,
             @ApiParam(value = "配对星座ID", required = true) @PathVariable("pairingId") Long pairingId,
-            @RequestParam(required = false) Long petId) {
-        if (petId == null || petId.toString().isEmpty()) {
+            @RequestParam(required = false) String petId) {
+        if (petId == null || petId.isEmpty()) {
             ResponseEntitys<ConstellationDetailsVO> response = new ResponseEntitys<>();
             response.setSuccess(false);
             response.setData(null);

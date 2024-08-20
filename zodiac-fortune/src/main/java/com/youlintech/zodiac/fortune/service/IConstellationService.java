@@ -30,6 +30,11 @@ public interface IConstellationService extends IService<Constellation> {
      */
     public AjaxResult addConstellation(Constellation constellation);
 
+    /**
+     *  修改星座
+     * @param constellation
+     * @return
+     */
     public AjaxResult updateConstellation(Constellation constellation);
 
     /**

@@ -6,6 +6,7 @@ import com.youlintech.zodiac.web.entity.ResponseEntitys;
 import com.youlintech.zodiac.web.mapper.ConstellationMapper;
 import com.youlintech.zodiac.web.model.vo.ConstellationDetailsVO;
 import com.youlintech.zodiac.web.service.ConstellationService;
+import com.youlintech.zodiac.web.service.MaterialLibraryService;
 import com.youlintech.zodiac.web.utils.RedisCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,8 @@ public class ConstellationServiceImpl extends ServiceImpl<ConstellationMapper, C
     private ConstellationMapper constellationMapper;
     @Autowired
     private RedisCache redisCache;
+    @Autowired
+    private MaterialLibraryService materialLibraryService;
 
     @Override
     public ResponseEntitys<ConstellationDetailsVO> getFortuneDetails(Long constellationId, Long pairingId) {
@@ -57,6 +60,7 @@ public class ConstellationServiceImpl extends ServiceImpl<ConstellationMapper, C
 // 如果不一致，从数据库获取Constellation对象
         Constellation constellation = this.getById(constellationFortuneDetail.getId());
         if (constellation != null) {
+            materialLibraryService.removeById(constellation.getMeterialLibraryId());
             constellation.setMeterialLibraryId(cachedMeterialLibraryId);
             this.updateById(constellation);
         } else {

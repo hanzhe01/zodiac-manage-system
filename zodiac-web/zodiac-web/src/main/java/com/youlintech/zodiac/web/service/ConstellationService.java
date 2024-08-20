@@ -13,5 +13,11 @@ import org.springframework.stereotype.Service;
 */
 @Service
 public interface ConstellationService extends IService<Constellation> {
+    /**
+     *  获取星座运势详情
+     * @param constellationId
+     * @param pairingId
+     * @return
+     */
     ResponseEntitys<ConstellationDetailsVO> getFortuneDetails(Long constellationId, Long pairingId);
 }

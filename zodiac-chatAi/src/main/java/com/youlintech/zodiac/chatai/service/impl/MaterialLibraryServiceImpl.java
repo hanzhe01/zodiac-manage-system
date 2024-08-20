@@ -46,15 +46,15 @@ public class MaterialLibraryServiceImpl extends ServiceImpl<MaterialLibraryMappe
                 "luckyTime幸运时间,幸运时间的格式为hh:mm-hh:mm," +
                 "luckyItems幸运物，" +
                 "purchaseLink幸运物品的购物链接，" +
-                "firstTitleName运势1名字，" +
+                "firstTitleName运势1名字为LOVE HOROSCOPE，" +
                 "firstTitleContent运势1内容，" +
                 "firstTitleStar运势1星级，" +
-                "secondTitleName运势2名字，" +
+                "secondTitleName运势2名字为WORK HOROSCOPE，" +
                 "secondTitleContent运势2内容，" +
                 "secondTitleStar运势2星级，" +
-                "thirdTitleName运势3名字，" +
+                "thirdTitleName运势3名字为HEALTH HOROSCOPE，" +
                 "thirdTitleContent运势3内容，" +
-                "thirdTitleStar运势3星级，星级为0.0-5.0的一个数字,运势的内容要丰富，不少于100字";
+                "thirdTitleStar运势3星级，星级为0.0-5.0的一个数字,运势的内容要丰富，运势名字固定生成即可不少于100字";
         prompt.append(numberCount);
         prompt.append(materialLibraryPrompt);
         prompt.append(remark);

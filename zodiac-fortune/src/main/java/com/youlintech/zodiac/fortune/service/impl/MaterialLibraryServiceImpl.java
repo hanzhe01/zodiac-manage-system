@@ -104,7 +104,6 @@ public class MaterialLibraryServiceImpl extends ServiceImpl<MaterialLibraryMappe
                         MaterialLibrary::getConstellationId,
                         Collectors.mapping(MaterialLibrary::getId, Collectors.toList())
                 ));
-        System.out.println(map);
         return map;
     }
 
