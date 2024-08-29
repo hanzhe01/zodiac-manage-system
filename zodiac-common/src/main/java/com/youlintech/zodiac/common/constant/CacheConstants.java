@@ -41,4 +41,9 @@ public class CacheConstants
      * 登录账户密码错误次数 redis key
      */
     public static final String PWD_ERR_CNT_KEY = "pwd_err_cnt:";
+
+    /**
+     * 定时任务缓存结果信息
+     */
+    public static final String JOB_RESULT_KEY = "FortuneTask:FortuneJob:msg";
 }

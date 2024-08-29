@@ -32,43 +32,17 @@ public class ConstellationServiceImpl extends ServiceImpl<ConstellationMapper, C
         if (constellationId == null || pairingId == null) {
             throw new IllegalArgumentException("constellationId and pairingId cannot be null");
         }
+        // 创建响应实体
+        ResponseEntitys<ConstellationDetailsVO> response = new ResponseEntitys<>();
 // 尝试获取数据，检查是否为null
         ConstellationDetailsVO constellationFortuneDetail = constellationMapper.getConstellationFortuneDetail(constellationId, pairingId);
         if (constellationFortuneDetail == null) {
-            // 可以抛出自定义异常或者返回错误响应
-        }
-
-        String materialIdKey = "constellation:" + constellationId + ":material_id";
-
-// 获取缓存中的素材ID，检查是否为null
-        Object cacheObject = redisCache.getCacheObject(materialIdKey);
-        Long cachedMeterialLibraryId = cacheObject != null ? (Long) cacheObject : null;
-        String redisMeterialLibraryId = cachedMeterialLibraryId != null ? cachedMeterialLibraryId.toString() : null;
-
-// 创建响应实体
-        ResponseEntitys<ConstellationDetailsVO> response = new ResponseEntitys<>();
-
-// 比较素材ID
-        if (constellationFortuneDetail.getMeterialLibraryId() != null && constellationFortuneDetail.getMeterialLibraryId().toString().equals(redisMeterialLibraryId)) {
-            response.setData(constellationFortuneDetail);
-            response.setSuccess(true);
-            response.setMsg("查询成功");
-            response.setCode("200");
-            return response;
-        }
-
-// 如果不一致，从数据库获取Constellation对象
-        Constellation constellation = this.getById(constellationFortuneDetail.getId());
-        if (constellation != null) {
-            materialLibraryService.removeById(constellation.getMeterialLibraryId());
-            constellation.setMeterialLibraryId(cachedMeterialLibraryId);
-            this.updateById(constellation);
-        } else {
             response.setSuccess(false);
+            response.setMsg("获取失败,素材未设置");
+            response.setCode("601");
             return response;
         }
-
-// 再次获取数据
+        // 再次获取数据
         ConstellationDetailsVO constellationDetailsVO = constellationMapper.getConstellationFortuneDetail(constellationId, pairingId);
         response.setData(constellationDetailsVO);
         response.setSuccess(true);

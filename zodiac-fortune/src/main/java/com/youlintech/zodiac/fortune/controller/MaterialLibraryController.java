@@ -93,6 +93,9 @@ public class MaterialLibraryController extends BaseController
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
         MaterialLibrary materialLibrary = materialLibraryService.getById(id);
+        if (materialLibrary == null) {
+            return error("素材ID设置错误");
+        }
         MaterialLibraryVO materialLibraryVO = BeanUtil.copyProperties(materialLibrary, MaterialLibraryVO.class);
         Constellation constellation = constellationService.getById(materialLibraryVO.getConstellationId());
 

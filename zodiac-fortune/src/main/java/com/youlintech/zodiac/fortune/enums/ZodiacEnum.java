@@ -6,6 +6,12 @@ package com.youlintech.zodiac.fortune.enums;
  * @date 2024-07-17
  */
 public enum ZodiacEnum {
+    /**
+     * 枚举类表示十二星座。
+     * @author oyhz
+     *
+     * @date 2024-07-17
+     */
     ARIES(1, "Aries"),
     TAURUS(2, "Taurus"),
     GEMINI(3, "Gemini"),

@@ -9,7 +9,6 @@ ruoyi:
   # 实例演示开关
   demoEnabled: true
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
-#  profile: D:/ruoyi/uploadPath
   profile: /home/ruoyi/uploadPath
   # 获取ip地址开关
   addressEnabled: false
@@ -19,7 +18,7 @@ ruoyi:
 # 开发环境配置
 server:
   # 服务器的HTTP端口，默认为8080
-  port: 8081
+  port: 8070
   servlet:
     # 应用的访问路径
     context-path: /
@@ -69,9 +68,9 @@ spring:
     druid:
       # 主库数据源
       master:
-        url: jdbc:mysql://8.134.49.74:3306/zodiac_fortune?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-        username: root
-        password: "oyhz123456..."
+        url: jdbc:mysql://127.0.0.1:3306/zodiac_fortune?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        username: zodiac_fortune
+        password: "2GdXkmj8JsZhxyct"
       # 从库数据源
       slave:
         # 从数据源开关/默认关闭
@@ -111,7 +110,7 @@ spring:
         url-pattern: /druid/*
         # 控制台管理用户名和密码
         login-username: admin
-        login-password: 123456
+        login-password: 2GdXkmj8JsZhxyct
       filter:
         stat:
           enabled: true
@@ -125,7 +124,7 @@ spring:
   # redis 配置
   redis:
     # 地址
-    host: 8.134.49.74
+    host: 127.0.0.1
     # 端口，默认为6379
     port: 6379
     # 数据库索引
@@ -150,9 +149,9 @@ token:
     # 令牌自定义标识
     header: Authorization
     # 令牌密钥
-    secret: abcdefghijklmnopqrstuvwxyz
+    secret: youlintech
     # 令牌有效期（默认30分钟）
-    expireTime: 30
+    expireTime: 120
 
 # MyBatis Plus配置
 mybatis-plus:

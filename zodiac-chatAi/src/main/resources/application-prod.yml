@@ -1,8 +1,8 @@
 spring:
   ai:
     openai:
-      base-url: https://api.xiaoai.plus
-      api-key: sk-hA3N5xpM6Pgedl0NFd2fDaCf66Ec47FcAc7d7954F8E0F69e
+      base-url: https://xiaoai.plus
+      api-key: sk-r42teb6oTUUe45td3eBdC88593334028A61dDf4f903990D0
   # 数据源配置
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource

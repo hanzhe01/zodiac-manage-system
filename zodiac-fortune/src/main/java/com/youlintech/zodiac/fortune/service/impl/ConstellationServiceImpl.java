@@ -20,9 +20,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -55,33 +52,7 @@ public class ConstellationServiceImpl extends ServiceImpl<ConstellationMapper, C
     @Override
     public List<Constellation> selectConstellationList(Constellation constellation)
     {
-        /**
-         * 通过Redis获取存储的今日素材id设置
-         */
-        List<Constellation> constellationList = constellationMapper.selectList(buildQueryWrapper(constellation));
-        for (Constellation con : constellationList) {
-            String materialIdKey = RedisConstant.getMaterialIdKey(con.getId());
-            String updateTimeStr = redisCache.getCacheObject(RedisConstant.AUTO_MATERIAL_LIBRARY_TIME_KEY);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-            Date updateTime = new Date();
-            try {
-                updateTime = sdf.parse(updateTimeStr);
-                log.info("Converted Date:{} ", updateTime);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            // 获取当前对象的MeterialLibraryId和Redis中对应的值
-            Long currentMaterialLibraryId = con.getMeterialLibraryId();
-            Long redisMaterialLibraryId = redisCache.getCacheObject(materialIdKey);
-            if (currentMaterialLibraryId != null && redisMaterialLibraryId != null
-                    && !currentMaterialLibraryId.equals(redisMaterialLibraryId)) {
-                con.setMeterialLibraryId(redisMaterialLibraryId);
-                materialLibraryService.removeById(currentMaterialLibraryId);
-                con.setUpdateTime(updateTime);
-                this.updateById(con);
-            }
-        }
-        return constellationList;
+        return constellationMapper.selectList(buildQueryWrapper(constellation));
     }
 
     @Override
@@ -143,7 +114,7 @@ public class ConstellationServiceImpl extends ServiceImpl<ConstellationMapper, C
     }
 
     private AjaxResult parameterVerify(Constellation constellation) {
-        Long meterialLibraryId = constellation.getMeterialLibraryId();
+        Long materialLibraryId = constellation.getMeterialLibraryId();
         Long weekMeterialLibraryId = constellation.getWeekMeterialLibraryId();
 
 /*        if ( meterialLibraryId == null) {
@@ -153,8 +124,8 @@ public class ConstellationServiceImpl extends ServiceImpl<ConstellationMapper, C
             return AjaxResult.error("本周素材ID不能为空");
         }*/
 
-        if ( meterialLibraryId != null) {
-            MaterialLibrary materialLibrary = materialLibraryService.getById(meterialLibraryId);
+        if ( materialLibraryId != null) {
+            MaterialLibrary materialLibrary = materialLibraryService.getById(materialLibraryId);
             if ( materialLibrary == null) {
                 return AjaxResult.error("今日素材不存在");
             }
